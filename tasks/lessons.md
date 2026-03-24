@@ -35,6 +35,30 @@ El repo principal se usa solo como destino del `git merge` + `git push`.
 
 ---
 
+### [2026-03-24] Error: EINVAL readlink en .next en Windows
+
+**Problema:**
+`npm run dev` falla con `EINVAL: invalid argument, readlink .next\server`.
+
+**Causa raíz:**
+En Windows, `.next` crea symlinks internos. Al borrar con bash (`rm -rf`),
+los symlinks quedan rotos. Next.js no puede leerlos al reiniciar.
+
+**Solución:**
+Borrar siempre `.next` con PowerShell, nunca con bash:
+```powershell
+Remove-Item -Recurse -Force .next
+```
+O usar el script añadido a package.json:
+```bash
+npm run clean
+```
+
+**Regla nueva:**
+En Windows, ante cualquier error de `.next`, usar `npm run clean` (no bash).
+
+---
+
 ### [2026-03-24] Error: "Cannot find module ./948.js" / caché corrupta
 
 **Problema:**
