@@ -4,82 +4,95 @@
 
 ## 🔴 EN PROGRESO
 
-### Ninguna — Semana 1 completada ✅
+### Ninguna — en pausa
 
 ---
 
-## 🟡 PENDIENTE - SEMANA 2
+## 🟡 PENDIENTE - SEMANA 3
 
-### **Generación de Prompts con OpenAI**
-
-**Prioridad:** Crítica
-**Estimado:** 1 día
-
-**Tareas:**
-- [ ] Configurar cliente OpenAI (lib/openai.ts)
-- [ ] Crear templates de prompts (lib/prompt-templates.ts)
-- [ ] API route POST /api/prompts/generate
-- [ ] Componente GeneratePromptsButton
-- [ ] Componente PromptCard (muestra prompt + campo para pegar respuesta)
-- [ ] Página /ideas/[id] (vista detalle de idea con prompts)
-
-**Criterio de completado:**
-Usuario puede generar 3-5 prompts para su idea y copiarlos al clipboard.
-
----
-
-### **Guardar respuestas de IA**
+### **Mostrar respuestas guardadas**
 
 **Prioridad:** Alta
-**Estimado:** 1 día
+**Estimado:** 1 hora
 
 **Tareas:**
-- [ ] API route PUT /api/prompts/[id]/answer
-- [ ] Campo de texto en PromptCard para pegar respuesta
-- [ ] Marcar prompt como respondido
-
-**Criterio de completado:**
-Usuario puede pegar la respuesta de ChatGPT y Spark la guarda.
+- [ ] PromptCard muestra la respuesta guardada al cargar la página
 
 ---
 
-## 🟢 COMPLETADO - SEMANA 1
+### **Límite de 10 ideas activas (free tier)**
 
-### ✅ Día 1: Setup del Proyecto
-**Completado:** 2026-03-24
-- [x] Next.js 14 + TypeScript strict + Tailwind
-- [x] Estructura de carpetas y variables de entorno
-- [x] Build limpio ✅
+**Prioridad:** Alta
+**Estimado:** 2 horas
 
-### ✅ Día 2: Supabase Setup
-**Completado:** 2026-03-24
-- [x] Clientes browser + servidor configurados
-- [x] Schema SQL ejecutado (ideas + prompts + RLS + triggers)
+**Tareas:**
+- [ ] POST /api/ideas retorna 403 si el usuario tiene 10+ ideas activas
+- [ ] CaptureForm muestra mensaje explicativo al alcanzar el límite
 
-### ✅ Día 3: Autenticación
-**Completado:** 2026-03-24
-- [x] Magic link end-to-end funcionando
-- [x] Middleware protege todas las rutas privadas
-- [x] Login + logout funcionales
+---
 
-### ✅ Día 4: Captura de Ideas
-**Completado:** 2026-03-24
-- [x] CaptureForm con auto-focus, Ctrl+Enter, contador de caracteres
-- [x] POST /api/ideas con validación Zod
-- [x] Ideas guardadas en Supabase ✅
+### **Notificaciones por email**
 
-### ✅ Día 5: Inbox de Ideas
+**Prioridad:** Media
+**Estimado:** 3 horas
+
+**Tareas:**
+- [ ] Configurar Resend
+- [ ] API route /api/emails/inactive-ideas
+- [ ] Email cuando una idea lleva 3+ días sin prompts generados
+
+---
+
+## 🟡 PENDIENTE - SEMANA 4
+
+### **PWA instalable**
+
+- [ ] Crear public/manifest.json
+- [ ] Configurar next-pwa
+- [ ] Iconos de app
+
+### **Deploy en Vercel**
+
+- [ ] Conectar repo a Vercel
+- [ ] Configurar variables de entorno en Vercel
+- [ ] Verificar que funciona en producción
+
+### **UI Polish**
+
+- [ ] Revisar móvil (iPhone 12/13 en DevTools)
+- [ ] Animaciones de transición
+- [ ] Estados de loading más pulidos
+
+---
+
+## 🟢 COMPLETADO
+
+### ✅ Semana 1: Fundamentos
 **Completado:** 2026-03-24
-- [x] Inbox con toggle Activas / Archivadas
-- [x] Archivar y restaurar ideas
-- [x] Empty states para ambas vistas
+
+- [x] Next.js 14 + TypeScript + Tailwind
+- [x] Supabase (ideas + prompts + RLS)
+- [x] Auth con magic link
+- [x] Captura de ideas (< 5 segundos)
+- [x] Inbox con toggle activas/archivadas + restaurar
+
+### ✅ Semana 2: Sistema de Prompts
+**Completado:** 2026-03-24
+
+- [x] 5 prompts template-based por idea (sin OpenAI)
+- [x] Copiar prompt al clipboard
+- [x] Pegar y guardar respuesta de IA
+- [x] Vista detalle de idea con progreso de prompts
+- [x] IdeaCard linkea al detalle
 
 ---
 
 ## 📊 PROGRESO GENERAL
 
-**Semana 1:** 5/5 completada ✅
-**Semana 2:** 0/2 completada
+**Semana 1:** ✅ completa
+**Semana 2:** ✅ completa
+**Semana 3:** 0/3 pendiente
+**Semana 4:** 0/3 pendiente
 
 ---
 
