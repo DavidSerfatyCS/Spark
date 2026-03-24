@@ -35,6 +35,48 @@ El repo principal se usa solo como destino del `git merge` + `git push`.
 
 ---
 
+### [2026-03-24] Error: "Cannot find module ./948.js" / caché corrupta
+
+**Problema:**
+Next.js muestra error de módulo no encontrado o `PageNotFoundError: /_document`
+después de agregar archivos nuevos o cambiar rutas.
+
+**Causa raíz:**
+La carpeta `.next` guarda chunks compilados con nombres hash. Cuando cambia
+la estructura de archivos, los hashes viejos quedan en caché y ya no existen.
+
+**Solución:**
+```bash
+rm -rf .next
+npm run dev   # o npm run build
+```
+
+**Regla nueva:**
+Ante cualquier error de módulo no encontrado en Next.js, lo primero es
+borrar `.next` y reiniciar. Si persiste, entonces investigar el código.
+
+---
+
+### [2026-03-24] Bug: router.push no refresca datos del servidor
+
+**Problema:**
+Después de guardar una idea y hacer `router.push("/ideas")`, el inbox
+mostraba la versión cacheada (vacía) en lugar de las ideas nuevas.
+
+**Causa raíz:**
+`router.push` en Next.js App Router usa el caché del cliente y no
+re-ejecuta los Server Components. Sirve la página guardada en memoria.
+
+**Solución:**
+Usar `window.location.href = "/ideas"` en lugar de `router.push`.
+Fuerza una carga completa desde el servidor, siempre con datos frescos.
+
+**Regla nueva:**
+Después de mutaciones (crear/editar/borrar), usar `window.location.href`
+o `window.location.reload()` para garantizar datos frescos del servidor.
+
+---
+
 ## Template para nuevas lecciones
 
 ```markdown

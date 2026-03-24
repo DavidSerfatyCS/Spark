@@ -11,7 +11,6 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { useRouter } from "next/navigation";
 
 // Estados posibles del formulario
 type FormState = "idle" | "saving" | "error";
@@ -25,7 +24,6 @@ export default function CaptureForm() {
   // useRef nos da acceso directo al elemento DOM del textarea.
   // Lo usamos para hacer focus automático al cargar la página.
   const textareaRef = useRef<HTMLTextAreaElement>(null);
-  const router = useRouter();
 
   // Focus automático al montar el componente.
   // En mobile esto abre el teclado de inmediato — ideal para captura rápida.
@@ -81,9 +79,12 @@ export default function CaptureForm() {
         throw new Error(data.error ?? "Error desconocido");
       }
 
-      // Idea guardada. Redirigimos al inbox para verla.
-      // router.push hace navegación del lado del cliente (sin recarga).
-      router.push("/ideas");
+      // Idea guardada. Redirigimos al inbox.
+      // Usamos window.location.href en lugar de router.push porque
+      // router.push puede servir una versión cacheada de /ideas
+      // que no incluye la idea recién guardada.
+      // window.location.href fuerza una carga completa desde el servidor.
+      window.location.href = "/ideas";
     } catch (error) {
       const message =
         error instanceof Error ? error.message : "Error al guardar";
