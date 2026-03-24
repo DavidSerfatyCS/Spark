@@ -8,6 +8,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import type { Idea } from "@/lib/types";
 
 interface IdeaCardProps {
@@ -63,9 +64,18 @@ export default function IdeaCard({ idea }: IdeaCardProps) {
       hover:border-violet-200 hover:shadow-sm
       transition-all duration-150
     ">
-      <p className={`text-base leading-relaxed mb-4 ${isArchived ? "text-gray-400" : "text-gray-900"}`}>
-        {idea.content}
-      </p>
+      {/* El contenido es un link al detalle (solo para ideas activas) */}
+      {isArchived ? (
+        <p className="text-base leading-relaxed mb-4 text-gray-400">
+          {idea.content}
+        </p>
+      ) : (
+        <Link href={`/ideas/${idea.id}`} className="block mb-4 group">
+          <p className="text-base leading-relaxed text-gray-900 group-hover:text-violet-700 transition-colors">
+            {idea.content}
+          </p>
+        </Link>
+      )}
 
       <div className="flex items-center justify-between">
         <span className="text-xs text-gray-400">
