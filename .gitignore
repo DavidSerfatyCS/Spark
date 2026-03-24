@@ -39,3 +39,6 @@ Thumbs.db
 # PWA
 public/sw.js
 public/workbox-*.js
+
+# TypeScript build cache
+tsconfig.tsbuildinfo
